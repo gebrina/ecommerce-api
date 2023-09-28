@@ -2,12 +2,15 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { User } from "./user.entity";
 import { ProductCategory } from "./product.category.entity";
+import { Order } from "./order.entity";
 
 @Entity()
 export class Product {
@@ -36,4 +39,8 @@ export class Product {
     eager: true,
   })
   category: ProductCategory;
+
+  @ManyToMany(() => Order, (order) => order.products)
+  @JoinColumn()
+  orders: Order[];
 }

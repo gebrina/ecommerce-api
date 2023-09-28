@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { Product } from "./product.entity";
+import { Order } from "./order.entity";
 
 @Entity()
 export class User {
@@ -33,4 +34,7 @@ export class User {
     onDelete: "CASCADE",
   })
   products: Product[];
+
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[];
 }
