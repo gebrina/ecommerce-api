@@ -7,7 +7,7 @@ import {
   Post,
   Put,
 } from "@nestjs/common";
-import { ProductCategorySevice } from "./product-categoyr.sevice";
+import { ProductCategorySevice } from "./product-categoyr.service";
 import { ProductCategory } from "src/entities/product.category.entity";
 
 @Controller("product-category")
