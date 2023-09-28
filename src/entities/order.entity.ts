@@ -26,6 +26,6 @@ export class Order {
   @ManyToOne(() => User, (user) => user.orders)
   user: User;
 
-  @ManyToMany(() => Product, (product) => product.orders)
+  @ManyToMany(() => Product, (product) => product.orders, { eager: true })
   products: Product[];
 }

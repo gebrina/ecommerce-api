@@ -35,6 +35,6 @@ export class User {
   })
   products: Product[];
 
-  @OneToMany(() => Order, (order) => order.user)
+  @OneToMany(() => Order, (order) => order.user, { eager: true })
   orders: Order[];
 }
