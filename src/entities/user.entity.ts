@@ -33,6 +33,7 @@ export class User {
   @OneToMany(() => Product, (product) => product.user, {
     eager: true,
     onDelete: "CASCADE",
+    onUpdate: "CASCADE",
   })
   products: Product[];
 

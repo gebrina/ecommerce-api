@@ -10,7 +10,7 @@ import {
 import { ProductCategorySevice } from "./product-categoyr.service";
 import { ProductCategory } from "src/entities/product.category.entity";
 
-@Controller("product-category")
+@Controller("product-categories")
 export class ProductCategoryController {
   constructor(private proCategoryService: ProductCategorySevice) {}
 

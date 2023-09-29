@@ -2,7 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
+  JoinTable,
   ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -42,7 +42,7 @@ export class Product {
   category: ProductCategory;
 
   @ManyToMany(() => Order, (order) => order.products)
-  @JoinColumn()
+  @JoinTable()
   orders: Order[];
 
   @ManyToOne(() => Cart, (cart) => cart.prodcuts)
