@@ -5,6 +5,8 @@ import { ProductCategoryModule } from "./product-category/product-categoyr.modul
 import { ProductModule } from "./product/product.module";
 import { OrderModule } from "./order/order.module";
 import { CartModule } from "./cart/cart.module";
+import { APP_FILTER } from "@nestjs/core";
+import { ErrorFilter } from "./error-filter/error.filter";
 
 @Module({
   imports: [
@@ -20,6 +22,12 @@ import { CartModule } from "./cart/cart.module";
     ProductModule,
     OrderModule,
     CartModule,
+  ],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: ErrorFilter,
+    },
   ],
 })
 export class AppModule {}
