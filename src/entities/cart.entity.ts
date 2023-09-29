@@ -7,6 +7,7 @@ import {
 } from "typeorm";
 import { User } from "./user.entity";
 import { Product } from "./product.entity";
+import { Order } from "./order.entity";
 
 @Entity()
 export class Cart {
@@ -21,4 +22,7 @@ export class Cart {
 
   @OneToMany(() => Product, (product) => product.cart)
   prodcuts: Product;
+
+  @OneToMany(() => Order, (order) => order.carts, { eager: true })
+  order: Order;
 }
