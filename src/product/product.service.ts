@@ -14,7 +14,10 @@ export class ProductService {
   }
 
   findOne(id: string): Promise<Product> {
-    return this.productRepo.findOneBy({ id });
+    return this.productRepo.findOne({
+      where: { id },
+      relations: { user: true },
+    });
   }
 
   create(product: Product): Promise<Product> {
@@ -22,9 +25,11 @@ export class ProductService {
   }
 
   async update(id: string, product: Product): Promise<Product> {
-    let prodcuttobeUpdated = await this.findOne(id);
-    prodcuttobeUpdated = Object.assign({}, prodcuttobeUpdated, product);
-    return await this.productRepo.save(prodcuttobeUpdated);
+    await this.productRepo.update({ id }, product);
+    return this.findOne(id);
+    //let prodcuttobeUpdated = await this.findOne(id);
+    // prodcuttobeUpdated = Object.assign({}, prodcuttobeUpdated, product);
+    // return await this.productRepo.save(product);
   }
 
   async delete(id: string): Promise<string> {

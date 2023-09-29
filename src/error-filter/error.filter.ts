@@ -11,7 +11,6 @@ export class ErrorFilter implements ExceptionFilter {
     } else {
       status = 500;
     }
-
     response.status(status);
     response.json({
       method: request.method,
