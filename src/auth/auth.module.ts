@@ -6,6 +6,8 @@ import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
 import { LocalStrategy } from "./local.strategy";
 import { ConfigModule } from "@nestjs/config";
+import { APP_GUARD } from "@nestjs/core";
+import { JwtStrategy } from "./jwt.strategy";
 
 @Module({
   imports: [
@@ -15,12 +17,12 @@ import { ConfigModule } from "@nestjs/config";
       secret: process.env.SECRET_KEY,
       global: true,
       signOptions: {
-        expiresIn: "30d",
+        expiresIn: "7d",
       },
     }),
     UserModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy],
 })
 export class AuthModule {}
