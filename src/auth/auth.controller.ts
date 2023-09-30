@@ -1,13 +1,14 @@
-import { Body, Controller, Post, Req } from "@nestjs/common";
+import { Controller, Post, Req, UseGuards } from "@nestjs/common";
 import { AuthService } from "./auth.service";
-import { User } from "src/entities/user.entity";
+import { AuthGuard } from "@nestjs/passport";
 
 @Controller("auth/user")
 export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post("")
-  login(@Body() user: User, @Req() req: Express.Request) {
+  @UseGuards(AuthGuard("local"))
+  login(@Req() req: Express.Request) {
     return req.user;
   }
 }
