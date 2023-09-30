@@ -9,14 +9,12 @@ import {
 } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { User } from "src/entities/user.entity";
-import { Public } from "src/decorators/PublicApi.decrator";
 
 @Controller("users")
 export class UserController {
   constructor(private userService: UserService) {}
 
   @Get("")
-  @Public()
   findAll(): Promise<User[]> {
     return this.userService.findAll();
   }
