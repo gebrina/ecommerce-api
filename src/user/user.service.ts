@@ -22,6 +22,10 @@ export class UserService {
     return await this.userRepo.save(user);
   }
 
+  async findUserByEmail(email: string): Promise<User> {
+    return await this.userRepo.findOneBy({ email });
+  }
+
   async update(id: string, user: User): Promise<User> {
     if (user?.password) {
       const hashedPassword = await bcrypt.hash(user.password, 10);

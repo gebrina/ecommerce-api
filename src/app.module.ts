@@ -7,6 +7,7 @@ import { OrderModule } from "./order/order.module";
 import { CartModule } from "./cart/cart.module";
 import { APP_FILTER } from "@nestjs/core";
 import { ErrorFilter } from "./error-filter/error.filter";
+import { AuthModule } from "./auth/auth.module";
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ErrorFilter } from "./error-filter/error.filter";
     ProductModule,
     OrderModule,
     CartModule,
+    AuthModule,
   ],
   providers: [
     {
