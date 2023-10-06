@@ -25,11 +25,7 @@ export class ProductService {
   }
 
   async update(id: string, product: Product): Promise<Product> {
-    await this.productRepo.update({ id }, product);
-    return this.findOne(id);
-    //let prodcuttobeUpdated = await this.findOne(id);
-    // prodcuttobeUpdated = Object.assign({}, prodcuttobeUpdated, product);
-    // return await this.productRepo.save(product);
+    return await this.productRepo.save(product);
   }
 
   async delete(id: string): Promise<string> {
