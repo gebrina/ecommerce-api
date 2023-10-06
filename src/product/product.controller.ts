@@ -6,10 +6,14 @@ import {
   Param,
   Post,
   Put,
+  UploadedFile,
+  UseInterceptors,
 } from "@nestjs/common";
 import { ProductService } from "./product.service";
 import { Product } from "src/entities/product.entity";
 import { Public } from "src/decorators/PublicApi.decrator";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { diskStorage } from "multer";
 
 @Controller("products")
 export class ProductController {
@@ -28,7 +32,20 @@ export class ProductController {
   }
 
   @Post()
-  create(@Body() product: Product) {
+  @UseInterceptors(
+    FileInterceptor("image", {
+      storage: diskStorage({
+        destination: "public/products-imgs",
+        filename: (req, file, callback) => {
+          const fileName = Date.now() + file.originalname.split(" ").join("-");
+          callback(null, fileName);
+        },
+      }),
+    }),
+  )
+  create(@Body() product: Product, @UploadedFile() file: Express.Multer.File) {
+    const productImage = file.path.replace("public", "").toString();
+    product.image = productImage;
     return this.productService.create(product);
   }
 

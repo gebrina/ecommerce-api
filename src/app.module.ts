@@ -8,7 +8,9 @@ import { CartModule } from "./cart/cart.module";
 import { APP_FILTER } from "@nestjs/core";
 import { ErrorFilter } from "./error-filter/error.filter";
 import { AuthModule } from "./auth/auth.module";
-
+import { MulterModule } from "@nestjs/platform-express";
+import { ServeStaticModule } from "@nestjs/serve-static";
+import { join } from "path";
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -17,6 +19,10 @@ import { AuthModule } from "./auth/auth.module";
       entities: ["dist/**/*.entity{.ts,.js}"],
       autoLoadEntities: true,
       synchronize: true,
+    }),
+    MulterModule.register(),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, "..", "public"),
     }),
     UserModule,
     ProductCategoryModule,
