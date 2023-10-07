@@ -15,6 +15,14 @@ import { Public } from "src/decorators/PublicApi.decrator";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { diskStorage } from "multer";
 
+const storage = diskStorage({
+  destination: "public/products-imgs",
+  filename: (req, file, callback) => {
+    const fileName = Date.now() + file.originalname.split(" ").join("-");
+    callback(null, fileName);
+  },
+});
+
 @Controller("products")
 export class ProductController {
   constructor(private productService: ProductService) {}
@@ -34,17 +42,11 @@ export class ProductController {
   @Post()
   @UseInterceptors(
     FileInterceptor("image", {
-      storage: diskStorage({
-        destination: "public/products-imgs",
-        filename: (req, file, callback) => {
-          const fileName = Date.now() + file.originalname.split(" ").join("-");
-          callback(null, fileName);
-        },
-      }),
+      storage,
     }),
   )
   create(@Body() product: Product, @UploadedFile() file: Express.Multer.File) {
-    const productImage = file.path.replace("public", "").toString();
+    const productImage = file?.path.replace("public", "").toString();
     product.image = productImage;
     return this.productService.create(product);
   }
@@ -52,13 +54,7 @@ export class ProductController {
   @Put(":id")
   @UseInterceptors(
     FileInterceptor("image", {
-      storage: diskStorage({
-        destination: "public/products",
-        filename: (req, file, callback) => {
-          const fileName = Date.now() + file.originalname.split(" ").join("-");
-          callback(null, fileName);
-        },
-      }),
+      storage,
     }),
   )
   update(
@@ -66,7 +62,7 @@ export class ProductController {
     @Body() product: Product,
     @UploadedFile() file: Express.Multer.File,
   ) {
-    const productImage = file.path.replace("public", "").toString();
+    const productImage = file?.path.replace("public", "").toString();
     product.image = productImage;
     return this.productService.update(id, product);
   }

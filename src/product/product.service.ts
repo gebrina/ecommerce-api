@@ -25,7 +25,9 @@ export class ProductService {
   }
 
   async update(id: string, product: Product): Promise<Product> {
-    return await this.productRepo.save(product);
+    let productTobeUpdated = await this.findOne(id);
+    productTobeUpdated = product;
+    return await this.productRepo.save(productTobeUpdated);
   }
 
   async delete(id: string): Promise<string> {
