@@ -50,7 +50,24 @@ export class ProductController {
   }
 
   @Put(":id")
-  update(id: string, @Body() product: Product) {
+  @UseInterceptors(
+    FileInterceptor("image", {
+      storage: diskStorage({
+        destination: "public/products",
+        filename: (req, file, callback) => {
+          const fileName = Date.now() + file.originalname.split(" ").join("-");
+          callback(null, fileName);
+        },
+      }),
+    }),
+  )
+  update(
+    id: string,
+    @Body() product: Product,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    const productImage = file.path.replace("public", "").toString();
+    product.image = productImage;
     return this.productService.update(id, product);
   }
 
