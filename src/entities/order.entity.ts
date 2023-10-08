@@ -30,10 +30,16 @@ export class Order {
   @Column()
   shippedDate: Date;
 
+  @Column()
+  status: number;
+
   @ManyToOne(() => User, (user) => user.orders)
   user: User;
 
-  @ManyToMany(() => Product, (product) => product.orders, { eager: true })
+  @ManyToMany(() => Product, (product) => product.orders, {
+    eager: true,
+    onUpdate: "CASCADE",
+  })
   products: Product[];
 
   @ManyToOne(() => Cart, (cart) => cart.order)
