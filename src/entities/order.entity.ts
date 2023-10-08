@@ -25,6 +25,9 @@ export class Order {
   productPrice: number;
 
   @Column()
+  address: string;
+
+  @Column()
   shippedDate: Date;
 
   @ManyToOne(() => User, (user) => user.orders)
