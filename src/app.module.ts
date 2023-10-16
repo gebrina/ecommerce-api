@@ -1,17 +1,19 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { UserModule } from "./user/user.module";
+import { APP_FILTER } from "@nestjs/core";
+import { MulterModule } from "@nestjs/platform-express";
+import { ServeStaticModule } from "@nestjs/serve-static";
+import { join } from "path";
 import { ProductCategoryModule } from "./product-category/product-categoyr.module";
 import { ProductModule } from "./product/product.module";
 import { OrderModule } from "./order/order.module";
 import { CartModule } from "./cart/cart.module";
-import { APP_FILTER } from "@nestjs/core";
+import { PaymentModule } from "./payment/payment.module";
 import { ErrorFilter } from "./error-filter/error.filter";
 import { AuthModule } from "./auth/auth.module";
-import { MulterModule } from "@nestjs/platform-express";
-import { ServeStaticModule } from "@nestjs/serve-static";
-import { join } from "path";
-import { PaymentModule } from "./payment/payment.module";
+import { ConfigModule } from "@nestjs/config";
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -21,6 +23,7 @@ import { PaymentModule } from "./payment/payment.module";
       autoLoadEntities: true,
       synchronize: true,
     }),
+    ConfigModule.forRoot(),
     MulterModule.register(),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, "..", "public"),
