@@ -11,6 +11,7 @@ import { AuthModule } from "./auth/auth.module";
 import { MulterModule } from "@nestjs/platform-express";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { join } from "path";
+import { PaymentModule } from "./payment/payment.module";
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -29,6 +30,7 @@ import { join } from "path";
     ProductModule,
     OrderModule,
     CartModule,
+    PaymentModule,
     AuthModule,
   ],
   providers: [
