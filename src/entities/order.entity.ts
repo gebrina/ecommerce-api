@@ -4,11 +4,13 @@ import {
   Entity,
   ManyToMany,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { User } from "./user.entity";
 import { Product } from "./product.entity";
 import { Cart } from "./cart.entity";
+import { Payment } from "./payment.entity";
 
 @Entity()
 export class Order {
@@ -44,4 +46,7 @@ export class Order {
 
   @ManyToOne(() => Cart, (cart) => cart.order)
   carts: Cart[];
+
+  @OneToOne(() => Payment, (payemnt) => payemnt.order)
+  payment: Payment;
 }
