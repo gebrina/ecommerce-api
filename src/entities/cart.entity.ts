@@ -21,8 +21,8 @@ export class Cart {
   user: User;
 
   @OneToMany(() => Product, (product) => product.cart)
-  prodcuts: Product;
+  prodcuts: Product[];
 
   @OneToMany(() => Order, (order) => order.carts, { eager: true })
-  order: Order;
+  order: Order[];
 }
