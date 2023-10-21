@@ -14,7 +14,7 @@ export class Cart {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column()
+  @Column({ nullable: true })
   total: number;
 
   @ManyToOne(() => User, (user) => user.carts)

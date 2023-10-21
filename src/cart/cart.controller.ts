@@ -16,7 +16,7 @@ export class CartController {
     return this.cartService.findOne(id);
   }
 
-  @Post(":id")
+  @Post("")
   create(cart: Cart): Promise<Cart> {
     return this.cartService.create(cart);
   }
