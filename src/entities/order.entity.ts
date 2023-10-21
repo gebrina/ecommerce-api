@@ -44,8 +44,8 @@ export class Order {
   })
   products: Product[];
 
-  @ManyToOne(() => Cart, (cart) => cart.order)
-  carts: Cart[];
+  @ManyToOne(() => Cart, (cart) => cart.orders)
+  cart: Cart;
 
   @OneToOne(() => Payment, (payemnt) => payemnt.order)
   payment: Payment;
