@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Post, Put } from "@nestjs/common";
 import { CartService } from "./cart.service";
 import { Cart } from "src/entities/cart.entity";
 
@@ -17,7 +17,7 @@ export class CartController {
   }
 
   @Post("")
-  create(cart: Cart): Promise<Cart> {
+  create(@Body() cart: Cart): Promise<Cart> {
     return this.cartService.create(cart);
   }
 
