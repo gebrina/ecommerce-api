@@ -20,7 +20,7 @@ export class CartController {
   }
 
   @Get(":id")
-  findOne(id: string): Promise<Cart> {
+  findOne(@Param("id") id: string): Promise<Cart> {
     return this.cartService.findOne(id);
   }
 
@@ -30,7 +30,7 @@ export class CartController {
   }
 
   @Put(":id")
-  update(id: string, cart: Cart): Promise<Cart> {
+  update(@Param("id") id: string, @Body() cart: Cart): Promise<Cart> {
     return this.cartService.update(id, cart);
   }
 
