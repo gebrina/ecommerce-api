@@ -16,7 +16,9 @@ export class CartService {
   }
 
   async create(cart: Cart): Promise<Cart> {
-    return await this.cartRepo.save(cart);
+    const cartProducts = this.cartRepo.create(cart);
+
+    return await this.cartRepo.save(cartProducts);
   }
 
   async update(id: string, cart: Cart): Promise<Cart> {
