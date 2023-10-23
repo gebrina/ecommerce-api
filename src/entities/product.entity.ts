@@ -51,6 +51,6 @@ export class Product {
   @JoinTable()
   orders: Order[];
 
-  @ManyToOne(() => Cart, (cart) => cart.prodcuts)
+  @ManyToOne(() => Cart, (cart) => cart.products)
   cart: Cart;
 }
