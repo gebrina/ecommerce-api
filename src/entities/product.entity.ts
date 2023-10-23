@@ -51,6 +51,6 @@ export class Product {
   @JoinTable()
   orders: Order[];
 
-  @ManyToOne(() => Cart, (cart) => cart.products)
+  @ManyToOne(() => Cart, (cart) => cart.products, { onDelete: "CASCADE" })
   cart: Cart;
 }

@@ -14,15 +14,21 @@ export class Cart {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column({ nullable: true })
+  @Column()
   total: number;
 
-  @ManyToOne(() => User, (user) => user.carts, { eager: true })
+  @ManyToOne(() => User, (user) => user.carts, {
+    eager: true,
+  })
   user: User;
 
-  @OneToMany(() => Product, (product) => product.cart, { eager: true })
+  @OneToMany(() => Product, (product) => product.cart, {
+    eager: true,
+  })
   products: Product[];
 
-  @OneToMany(() => Order, (order) => order.cart, { eager: true })
+  @OneToMany(() => Order, (order) => order.cart, {
+    eager: true,
+  })
   orders: Order[];
 }

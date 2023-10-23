@@ -41,7 +41,7 @@ export class User {
   @OneToMany(() => Order, (order) => order.user, { eager: true })
   orders: Order[];
 
-  @OneToMany(() => Cart, (cart) => cart.user)
+  @OneToMany(() => Cart, (cart) => cart.user, { onDelete: "CASCADE" })
   carts: Cart[];
 
   @OneToMany(() => Payment, (payment) => payment.user)
