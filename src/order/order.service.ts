@@ -8,7 +8,11 @@ export class OrderService {
   constructor(@InjectRepository(Order) private orderRepo: Repository<Order>) {}
 
   findAll(): Promise<Order[]> {
-    return this.orderRepo.find();
+    return this.orderRepo.find({
+      relations: {
+        user: true,
+      },
+    });
   }
 
   findOne(id: string): Promise<Order> {
