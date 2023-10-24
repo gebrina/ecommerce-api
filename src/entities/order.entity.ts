@@ -29,7 +29,7 @@ export class Order {
   @Column()
   address: string;
 
-  @Column()
+  @Column({ nullable: true })
   shippedDate: Date;
 
   @Column()
