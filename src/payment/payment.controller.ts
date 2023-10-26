@@ -1,20 +1,32 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { PaymentService } from "./payment.service";
-import { Public } from "src/decorators/PublicApi.decrator";
 import { Payment } from "src/entities/payment.entity";
 
 @Controller("payment")
 export class PaymentController {
   constructor(private paymentService: PaymentService) {}
 
+  @Get("")
+  findAll(): Promise<Payment[]> {
+    return this.paymentService.findAll();
+  }
+
+  @Post("")
+  create(@Body() payment: Payment): Promise<Payment> {
+    return this.paymentService.create(payment);
+  }
+
+  @Delete(":id")
+  delete(@Param("id") id: string): Promise<string> {
+    return this.paymentService.delete(id);
+  }
+
   @Get("public-key")
-  @Public()
   findPublickKey() {
     return this.paymentService.findPublicKey();
   }
 
   @Post("intent")
-  @Public()
   createPaymentIntent(@Body() payment: Payment): Promise<string> {
     return this.paymentService.createPaymentIntent(payment);
   }
