@@ -6,7 +6,7 @@ import { Repository } from "typeorm";
 
 @Injectable()
 export class PaymentService {
-  private stripe;
+  private stripe: Stripe;
   constructor(
     @InjectRepository(Payment) private payementRepo: Repository<Payment>,
   ) {
@@ -36,10 +36,23 @@ export class PaymentService {
     try {
       const { amount } = payemnt;
       const { client_secret } = await this.stripe.paymentIntents.create({
-        amount: amount * 100,
+        amount: amount,
         currency: "usd",
       });
       return client_secret;
+    } catch (e) {
+      return e.message;
+    }
+  }
+
+  async retrievePaymentIntent(id: string) {
+    try {
+      const { amount_received, amount } =
+        await this.stripe.paymentIntents.retrieve(id);
+      return {
+        amount,
+        amount_received,
+      };
     } catch (e) {
       return e.message;
     }

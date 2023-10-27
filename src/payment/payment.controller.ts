@@ -16,6 +16,11 @@ export class PaymentController {
     return this.paymentService.create(payment);
   }
 
+  @Get("retrieve/:id")
+  retrievePayment(@Param("id") id: string) {
+    return this.paymentService.retrievePaymentIntent(id);
+  }
+
   @Delete(":id")
   delete(@Param("id") id: string): Promise<string> {
     return this.paymentService.delete(id);
