@@ -35,7 +35,9 @@ export class Order {
   @Column()
   status: number;
 
-  @ManyToOne(() => User, (user) => user.orders)
+  @ManyToOne(() => User, (user) => user.orders, {
+    onDelete: "CASCADE",
+  })
   user: User;
 
   @ManyToMany(() => Product, (product) => product.orders, {

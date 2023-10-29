@@ -7,20 +7,20 @@
 
     <style>
       body {
-        border: 3px solid midnightblue;
+        border: 1px solid rgba(11, 11, 54, 0.5);
         text-align: center;
-        font-size: 20px;
         padding: 20px 10px;
       }
       h1 span {
-        color: midnightblue;
+        color: rgb(10, 103, 10);
+        text-decoration: underline;
       }
     </style>
   </head>
   <body>
     <h1>Hey <span> <%= username %></span></h1>
-    <p>You have paid <%= amount %></p>
-    <p>Thanks for choosing us and using our services</p>
+    <p>You have paid <b> $<%= amount %></b></p>
+    <p>Thanks for choosing us and using our services!</p>
     <p>For more products like this click the link below.</p>
     <a href="<%= products_url %>"><%= products_url %></a>
   </body>

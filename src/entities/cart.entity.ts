@@ -19,6 +19,7 @@ export class Cart {
 
   @ManyToOne(() => User, (user) => user.carts, {
     eager: true,
+    onDelete: "CASCADE",
   })
   user: User;
 

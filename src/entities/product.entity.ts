@@ -39,7 +39,7 @@ export class Product {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => User, (user) => user.products)
+  @ManyToOne(() => User, (user) => user.products, { onDelete: "CASCADE" })
   user: User;
 
   @ManyToOne(() => ProductCategory, (category) => category.products, {

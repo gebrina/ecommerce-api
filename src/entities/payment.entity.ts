@@ -20,7 +20,10 @@ export class Payment {
   @CreateDateColumn()
   paymentDate: Date;
 
-  @ManyToOne(() => User, (user) => user.payments, { eager: true })
+  @ManyToOne(() => User, (user) => user.payments, {
+    eager: true,
+    onDelete: "CASCADE",
+  })
   user: User;
 
   @OneToOne(() => Order, (order) => order.payment)

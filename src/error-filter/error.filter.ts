@@ -6,11 +6,13 @@ export class ErrorFilter implements ExceptionFilter {
     const response = host.switchToHttp().getResponse<Response>();
     const request = host.switchToHttp().getRequest<Request>();
     let status;
+
     if (typeof exception.getStatus === "function") {
       status = exception.getStatus();
     } else {
       status = 500;
     }
+
     response.status(status);
     response.json({
       method: request.method,

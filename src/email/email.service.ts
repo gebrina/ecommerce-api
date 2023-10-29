@@ -8,19 +8,20 @@ export class EmailService {
 
   async sendEmail(payment: Payment) {
     const { email, username } = payment.user;
-    const products_url = "http://your_front_end_app.com/products";
+    const products_url = "https://your_front_end_app.com/products";
 
     try {
-      await this.mailerService.sendMail({
+      const response = await this.mailerService.sendMail({
         subject: "Payment Success",
         to: email,
-        template: "/payment.complete",
+        template: "payment.complete.ejs",
         context: {
           username,
           amount: payment.amount,
           products_url,
         },
       });
+      return response;
     } catch (e) {
       return e.message;
     }
