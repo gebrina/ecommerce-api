@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { EmailService } from "src/email/email.service";
 import { Payment } from "src/entities/payment.entity";
 import Stripe from "stripe";
 import { Repository } from "typeorm";
@@ -9,6 +10,7 @@ export class PaymentService {
   private stripe: Stripe;
   constructor(
     @InjectRepository(Payment) private payementRepo: Repository<Payment>,
+    private emailService: EmailService,
   ) {
     this.stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
       apiVersion: "2023-08-16",
@@ -20,7 +22,9 @@ export class PaymentService {
   }
 
   async create(payment: Payment): Promise<Payment> {
-    return await this.payementRepo.save(payment);
+    const newPayment = await this.payementRepo.save(payment);
+    await this.emailService.sendEmail(newPayment);
+    return newPayment;
   }
 
   findPublicKey() {
