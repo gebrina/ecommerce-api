@@ -13,6 +13,7 @@ import { PaymentModule } from "./payment/payment.module";
 import { ErrorFilter } from "./error-filter/error.filter";
 import { AuthModule } from "./auth/auth.module";
 import { ConfigModule } from "@nestjs/config";
+import { EmailModule } from "./email/email.module";
 
 @Module({
   imports: [
@@ -23,7 +24,9 @@ import { ConfigModule } from "@nestjs/config";
       autoLoadEntities: true,
       synchronize: true,
     }),
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     MulterModule.register(),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, "..", "public"),
@@ -34,6 +37,7 @@ import { ConfigModule } from "@nestjs/config";
     OrderModule,
     CartModule,
     PaymentModule,
+    EmailModule,
     AuthModule,
   ],
   providers: [
