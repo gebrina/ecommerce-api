@@ -35,7 +35,7 @@ export class ProductController {
 
   @Get(":id")
   @Public()
-  findOne(id: string) {
+  findOne(@Param("id") id: string) {
     return this.productService.findOne(id);
   }
 
